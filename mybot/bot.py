@@ -1,5 +1,7 @@
 import logging
 from telegram.ext import Updater, CommandHandler
+from scrfp import parse_data
+
 logging.basicConfig(filename='bot.pristav', level=logging.INFO)
 PROXY = {'proxy_url': 'socks5://t2.learn.python.ru:1080',
     'urllib3_proxy_kwargs': {'username': 'learn', 'password': 'python'}}
@@ -16,5 +18,10 @@ def main():
 def greet_user(update, context):
     print('Вызван /start')
     update.message.reply_text('Привет! Я Бот-пристав. Проверим ваши задолженности?')
+    update.message.reply_text('Введите ваше Имя')
+    name = update.message.text
+    update.message.reply_text('Введите вашу фамилию')
+
+    parse_data(update.message.text)
 
 main()
